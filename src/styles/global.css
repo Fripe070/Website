@@ -1,9 +1,11 @@
 @import "./reset.css";
 @import "@fontsource-variable/arimo/wght.css";
+@import "@fontsource-variable/jetbrains-mono/wght.css";
 
 :root {
 	font-family: var(--font-sans);
 	--font-sans: "Arimo Variable", sans-serif;
+	--font-code: "JetBrains Mono Variable", monospace;
 
 	--color-true-dark: oklch(0.1183 0.0347 220);
 	--color-true-light: oklch(0.9302 0.0428 220);
@@ -17,14 +19,6 @@
 
 	scrollbar-width: auto;
 	scrollbar-color: var(--color-accent) transparent;
-}
-*::selection {
-	background-color: var(--color-accent);
-	color: contrast-color(var(--color-accent));
-}
-
-hr {
-	border-color: var(--color-light);
 }
 
 @property --color-dark {
@@ -67,23 +61,6 @@ body {
 	height: 100%;
 }
 
-a {
-	color: inherit;
-	text-decoration: none;
-}
-.clickable {
-	--click-col: var(--color-accent);
-	--click-col-alt: contrast-color(var(--click-col));
-
-	color: var(--click-col);
-	&:hover,
-	&:focus-visible {
-		color: var(--click-col-alt);
-		background-color: var(--click-col);
-		outline: 2px solid var(--click-col);
-	}
-}
-
 .sr-only {
 	position: absolute;
 	width: 1px;
@@ -108,6 +85,39 @@ a {
 	);
 }
 
+.clickable {
+	--click-col: var(--color-accent);
+	--click-col-alt: contrast-color(var(--click-col));
+
+	color: var(--click-col);
+	&:hover,
+	&:focus-visible {
+		color: var(--click-col-alt);
+		background-color: var(--click-col);
+		outline: 2px solid var(--click-col);
+	}
+}
+
+*::selection {
+	background-color: var(--color-accent);
+	color: contrast-color(var(--color-accent));
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+hr {
+	border: none;
+	border-top: 2px solid var(--color-light);
+	margin: 2rem 0;
+}
+
+code {
+	font-family: var(--font-code);
+}
+
 .prose {
 	ul {
 		margin-left: 5rem;
@@ -116,5 +126,25 @@ a {
 	ol {
 		margin-left: 5rem;
 		list-style-type: decimal;
+	}
+	blockquote {
+		border-left: 1rem solid var(--color-light);
+		padding-left: 2rem;
+		margin: 2rem 0;
+	}
+}
+
+.astro-code {
+	margin: 1rem 0;
+	padding: 1rem 2rem;
+	font-size: 85%;
+	border: 2px solid var(--color-light);
+}
+@media (prefers-color-scheme: dark) {
+	.astro-code {
+		background-color: var(--shiki-dark-bg) !important;
+	}
+	.astro-code span {
+		color: var(--shiki-dark) !important;
 	}
 }

@@ -17,5 +17,11 @@ export default defineConfig({
 		processor: unified({
 			remarkPlugins: [remarkReadingTime, remarkModifiedTime],
 		}),
+		shikiConfig: {
+			themes: {
+				light: "one-dark-pro",
+				dark: "one-dark-pro",
+			},
+		},
 	},
 });
