@@ -36,4 +36,157 @@ var fun = function lang(l) {
 };
 ```
 
+```css
+@import "./reset.css";
+@import "@fontsource-variable/arimo/wght.css";
+@import "@fontsource-variable/jetbrains-mono/wght.css";
+
+:root {
+    font-family: var(--font-sans);
+    --font-sans: "Arimo Variable", sans-serif;
+    --font-code: "JetBrains Mono Variable", monospace;
+
+    --color-true-dark: oklch(0.1183 0.0347 220);
+    --color-true-light: oklch(0.9302 0.0428 220);
+    --color-accent: oklch(0.7181 0.1578 220);
+
+    /* Note that these are written from the perspective of dark mode.
+	--color-dark is a dark color in dark mode, and a light color in light mode. */
+    color-scheme: dark light;
+    --color-dark: light-dark(var(--color-true-light), var(--color-true-dark));
+    --color-light: light-dark(var(--color-true-dark), var(--color-true-light));
+
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-accent) transparent;
+}
+
+@property --color-dark {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: oklch(0.1 0.018 220);
+}
+@property --color-light {
+    syntax: "<color>";
+    inherits: true;
+    initial-value: oklch(0.95 0.035 0);
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+html {
+    font-size: 25%;
+    min-height: 100dvh;
+}
+body {
+    font-size: 4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-dark {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+.panel-light {
+    background-color: var(--color-light);
+    color: var(--color-dark);
+}
+
+.full-size {
+    width: 100%;
+    height: 100%;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.dash-shade {
+    --dash-angle: 45deg;
+    --dash-size: 0.8rem;
+    background-image: repeating-linear-gradient(
+        var(--dash-angle),
+        var(--color-dark) 0,
+        var(--color-dark) var(--dash-size),
+        var(--color-light) var(--dash-size),
+        var(--color-light) calc(var(--dash-size) * 2)
+    );
+}
+
+.clickable {
+    --click-col: var(--color-accent);
+    --click-col-alt: contrast-color(var(--click-col));
+
+    color: var(--click-col);
+    &:hover,
+    &:focus-visible {
+        color: var(--click-col-alt);
+        background-color: var(--click-col);
+        outline: 2px solid var(--click-col);
+    }
+}
+
+*::selection {
+    background-color: var(--color-accent);
+    color: contrast-color(var(--color-accent));
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+hr {
+    border: none;
+    border-top: 2px solid var(--color-light);
+    margin: 2rem 0;
+}
+
+code {
+    font-family: var(--font-code);
+}
+
+.prose {
+    ul {
+        margin-left: 5rem;
+        list-style-type: "-  ";
+    }
+    ol {
+        margin-left: 5rem;
+        list-style-type: decimal;
+    }
+    blockquote {
+        border-left: 1rem solid var(--color-light);
+        padding-left: 2rem;
+        margin: 2rem 0;
+    }
+}
+
+.astro-code {
+    margin: 1rem 0;
+    padding: 1rem 2rem;
+    font-size: 85%;
+    border: 2px solid var(--color-light);
+}
+@media (prefers-color-scheme: dark) {
+    .astro-code {
+        background-color: var(--shiki-dark-bg) !important;
+    }
+    .astro-code span {
+        color: var(--shiki-dark) !important;
+    }
+}
+```
+
 Isn't it cool??

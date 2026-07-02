@@ -6,12 +6,6 @@ import MainLayout from "@layouts/MainLayout.astro";
 import { getCollection } from "astro:content";
 
 const blogPosts = await getCollection("blog");
-const microPosts = await getCollection("microblog");
-
-const interweaved = [
-	...blogPosts.map((post) => ({ ...post, class: "blog-post" as const })),
-	...microPosts.map((post) => ({ ...post, class: "micro-post" as const })),
-];
 ---
 
 <MainLayout>

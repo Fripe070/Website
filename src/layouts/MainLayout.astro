@@ -11,22 +11,42 @@ const navPages = {
 
 <Layout>
 	<Background />
-	<page-container class="panel-dark full-size">
-		<NavList navPages={navPages} />
-		<slot />
-	</page-container>
+	<page-wrapper class="panel-dark">
+		<title-bar class="panel-dark">
+			<NavList navPages={navPages} />
+		</title-bar>
+		<page-container>
+			<slot />
+		</page-container>
+		<footer>
+		</footer>
+	</page-wrapper>
 </Layout>
 
 <style>
-	page-container {
-		display: flex;
-		flex-direction: column;
+	title-bar {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+	footer {
+		border-top: 2px solid var(--color-light);
+		padding: 3rem;
+	}
+
+	page-wrapper {
+		flex-grow: 1;
+		width: 100%;
 		max-width: 180rem;
 		margin: 0 auto;
 		/* Outline will not render for screens slimmer than the max width */
 		outline: 2px solid var(--color-light);
 	}
-
+	page-container {
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+	}
 	page-container > :global(main) {
 		padding: 3rem 3rem;
 	}
