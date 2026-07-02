@@ -1,21 +1,8 @@
 @import "./reset.css";
-@import "@fontsource-variable/arimo/wght.css";
-@import "@fontsource-variable/jetbrains-mono/wght.css";
+@import "./variables.css";
 
 :root {
 	font-family: var(--font-sans);
-	--font-sans: "Arimo Variable", sans-serif;
-	--font-code: "JetBrains Mono Variable", monospace;
-
-	--color-true-dark: oklch(0.1183 0.0347 220);
-	--color-true-light: oklch(0.9302 0.0428 220);
-	--color-accent: oklch(0.7181 0.1578 220);
-
-	/* Note that these are written from the perspective of dark mode.
-	--color-dark is a dark color in dark mode, and a light color in light mode. */
-	color-scheme: dark light;
-	--color-dark: light-dark(var(--color-true-light), var(--color-true-dark));
-	--color-light: light-dark(var(--color-true-dark), var(--color-true-light));
 
 	scrollbar-width: auto;
 	scrollbar-color: var(--color-true-light) var(--color-true-dark);

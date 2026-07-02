@@ -1,0 +1,19 @@
+---
+import cssTheme from "@styles/giscus-theme.css?url";
+const fullThemeUrl = new URL(cssTheme, Astro.site).href;
+---
+
+<giscus-widget
+	id="comments"
+	repo="Fripe070/website"
+	category="Comments"
+	mapping="pathname"
+	term="Welcome to giscus!"
+	reactionsenabled="0"
+	emitmetadata="0"
+	theme={import.meta.env.DEV ? "preferred_color_scheme" : fullThemeUrl}
+	loading="lazy"></giscus-widget>
+
+<script>
+	import "giscus";
+</script>
