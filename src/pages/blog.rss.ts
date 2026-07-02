@@ -19,7 +19,7 @@ export async function GET(context: APIContext) {
 	const posts = await getCollection("blog");
 	const items: RSSFeedItem[] = await Promise.all(
 		posts
-			.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1))
+			.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
 			.map(async (post) => {
 				const { Content } = await render(post);
 				const rawContent = await container.renderToString(Content);

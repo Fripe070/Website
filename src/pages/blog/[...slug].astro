@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
-import BlogPost from "@layouts/BlogPost.astro";
+import MainLayout from "@layouts/MainLayout.astro";
+import FormattedDate from "@components/FormattedDate.astro";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("blog");
@@ -12,9 +13,51 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter: remarkData } = await render(post);
+
+const pubDate = new Date(post.data.pubDate);
+const modDate = new Date(remarkData.lastModified);
+const isModified = pubDate.getDay() !== modDate.getDay();
 ---
 
-<BlogPost {...post.data}>
-	<Content />
-</BlogPost>
+<MainLayout>
+	<main class="nopad">
+		<article>
+			<header>
+				<h1>{post.data.title}</h1>
+				<post-meta>
+					<reading-time>{remarkData.minutesRead}</reading-time>
+					<date-published>Published <FormattedDate date={pubDate} /></date-published>
+					{
+						isModified && (
+							<date-modified>
+								Last updated <FormattedDate date={modDate} />
+							</date-modified>
+						)
+					}
+				</post-meta>
+			</header>
+			<div class="prose">
+				<Content />
+			</div>
+		</article>
+	</main>
+</MainLayout>
+
+<style>
+	header {
+		border-bottom: 2px solid var(--color-light);
+		padding-bottom: 2rem;
+		post-meta {
+			opacity: 0.8;
+			display: flex;
+			flex-direction: row;
+			> :not(:first-child) {
+				&::before {
+					content: "|";
+					margin: 0 2rem;
+				}
+			}
+		}
+	}
+</style>

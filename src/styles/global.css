@@ -23,6 +23,10 @@
 	color: contrast-color(var(--color-accent));
 }
 
+hr {
+	border-color: var(--color-light);
+}
+
 @property --color-dark {
 	syntax: "<color>";
 	inherits: true;
@@ -102,4 +106,15 @@ a {
 		var(--color-light) var(--dash-size),
 		var(--color-light) calc(var(--dash-size) * 2)
 	);
+}
+
+.prose {
+	ul {
+		margin-left: 5rem;
+		list-style-type: "-  ";
+	}
+	ol {
+		margin-left: 5rem;
+		list-style-type: decimal;
+	}
 }

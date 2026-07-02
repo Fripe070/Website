@@ -1,7 +1,7 @@
 ---
 title: Image test!
 description: Test which could have images
-pubDate: 2026-06-02
+pubDate: 2026-07-02
 ---
 
 Test which could have images in its folder
