@@ -1,0 +1,33 @@
+---
+import Background from "@components/Background.astro";
+import NavList from "@components/NavList.astro";
+import Layout from "@layouts/Layout.astro";
+
+const navPages = {
+	"/": "Home",
+	"/blog": "Blog",
+};
+---
+
+<Layout>
+	<Background />
+	<page-container class="panel-dark full-size">
+		<NavList navPages={navPages} />
+		<slot />
+	</page-container>
+</Layout>
+
+<style>
+	page-container {
+		display: flex;
+		flex-direction: column;
+		max-width: 180rem;
+		margin: 0 auto;
+		/* Outline will not render for screens slimmer than the max width */
+		outline: 2px solid var(--color-light);
+	}
+
+	page-container > :global(main) {
+		padding: 3rem 3rem;
+	}
+</style>

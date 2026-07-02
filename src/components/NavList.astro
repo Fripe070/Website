@@ -1,0 +1,46 @@
+---
+interface Props {
+	navPages: Record<string, string>;
+}
+const { navPages } = Astro.props;
+---
+
+<nav>
+	<ul>
+		{
+			Object.entries(navPages).map(([path, name], index) => (
+				<>
+					{index !== 0 && <li aria-hidden="true" class="separator" />}
+					<li>
+						<a class="clickable" style="--click-col: var(--color-light);" tabindex="0" href={path}>
+							{name}
+						</a>
+					</li>
+				</>
+			))
+		}
+		<slot />
+	</ul>
+</nav>
+
+<style>
+	nav {
+		border-bottom: 2px solid var(--color-light);
+		padding: 2rem 3rem;
+	}
+	ul {
+		height: 6rem;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 3rem;
+		> li[aria-hidden="true"] {
+			user-select: none;
+		}
+	}
+
+	.separator {
+		border-left: 2px solid var(--color-light);
+		height: 100%
+	}
+</style>

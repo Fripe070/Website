@@ -1,0 +1,53 @@
+<page-background>
+	<img src="https://picsum.photos/1000/750" />
+	<scan-lines></scan-lines>
+</page-background>
+
+<style>
+	* {
+		position: absolute;
+		inset: 0;
+		user-select: none;
+		pointer-events: none;
+	}
+	page-background {
+		z-index: -1;
+		background-color: var(--color-true-light);
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			filter: grayscale(0.9) contrast(1.5) brightness(0.4);
+			mix-blend-mode: multiply;
+			background-color: hsl(0, 0%, 50%);
+		}
+	}
+
+	scan-lines {
+		--line-size: 0.4rem;
+		--line-color: color-mix(in oklch, black, transparent 70%);
+		background: repeating-linear-gradient(
+			var(--line-color) 0,
+			var(--line-color) var(--line-size),
+			transparent var(--line-size),
+			transparent calc(var(--line-size) * 2)
+		);
+		mix-blend-mode: overlay;
+		animation: scan-lines 1s linear infinite;
+		backdrop-filter: blur(1px);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		scan-lines {
+			animation: none;
+		}
+	}
+
+	@keyframes scan-lines {
+		0% {
+			background-position: 0 0;
+		}
+		100% {
+			background-position: 0 calc(var(--line-size) * 2);
+		}
+	}
+</style>

@@ -1,0 +1,115 @@
+---
+import RssIcon from "~icons/mdi/rss";
+
+import FormattedDate from "@components/FormattedDate.astro";
+import NavList from "@components/NavList.astro";
+import MainLayout from "@layouts/MainLayout.astro";
+import { getCollection } from "astro:content";
+
+const blogPosts = await getCollection("blog");
+---
+
+<MainLayout>
+	<filter-bar>
+		<filter-toggle>
+			<input type="checkbox" name="full-blog-filter" id="full-blog-filter" checked />
+			<label for="full-blog-filter" class="clickable">Full blogs</label>
+			<input type="checkbox" name="micro-blog-filter" id="micro-blog-filter" checked />
+			<label for="micro-blog-filter" class="clickable">Micro-blogs</label>
+		</filter-toggle>
+
+		<a href="/blog.rss" class="rss panel-light" aria-label="RSS feed">
+			<RssIcon class="rss-icon" />
+		</a>
+	</filter-bar>
+
+	<main>
+		<ul>
+			{
+				// TODO: Add microblogs too and allow them to be filtered by toggling hiding classes
+				// TODO: Turn inner part (inside li) into component
+				blogPosts
+					.sort((a, b) => (a.data.pubDate > b.data.pubDate ? -1 : 1))
+					.map((post) => (
+						<li class="blog-post panel-light">
+							<article>
+								<header>
+									<a href={`/blog/${post.id}`}>
+										<h2>{post.data.title}</h2>
+									</a>
+									<FormattedDate date={post.data.pubDate} />
+								</header>
+								<p>{post.data.description}</p>
+							</article>
+						</li>
+					))
+			}
+		</ul>
+	</main>
+</MainLayout>
+
+<style>
+	filter-bar {
+		border-bottom: 2px solid var(--color-light);
+		padding: 2rem 3rem;
+
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 3rem;
+
+		filter-toggle {
+			display: flex;
+			gap: 3rem;
+
+			input[type="checkbox"] {
+				display: none;
+			}
+			label {
+				padding: 0.5rem 1rem;
+				cursor: pointer;
+				border: 2px solid var(--color-light);
+				background-color: var(--color-dark);
+				color: var(--color-light);
+			}
+			input[type="checkbox"]:checked + label {
+				background-color: var(--color-light);
+				color: var(--color-dark);
+			}
+		}
+	}
+
+	.rss {
+		margin-left: auto;
+		> .rss-icon {
+			width: 1lh;
+			height: 1lh;
+		}
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		.blog-post {
+			padding: 0.25rem 2rem;
+			header {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 1rem;
+				a {
+					flex-grow: 1;
+					h2 {
+						font-size: 5rem;
+						overflow-wrap: anywhere;
+					}
+				}
+				time {
+					flex-shrink: 0;
+				}
+			}
+		}
+	}
+</style>
