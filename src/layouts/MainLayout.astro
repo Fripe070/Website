@@ -15,7 +15,7 @@ const navPages = {
 	<page-wrapper class="panel-dark">
 		<title-bar class="panel-dark">
 			<NavList navPages={navPages} />
-			<Breadcrumbs />
+			<Breadcrumbs ignoredPages={Object.keys(navPages)} />
 		</title-bar>
 		<page-container>
 			<slot />
