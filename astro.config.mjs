@@ -11,8 +11,8 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeSlug from "rehype-slug";
 
 export default defineConfig({
-	// site: "https://fripe.dev",
-	site: "http://localhost:4321",
+	site: "https://fripe.dev",
+	// site: "http://localhost:4321",
 	integrations: [mdx(), sitemap()],
 	vite: {
 		plugins: [Icons({ compiler: "astro" })],

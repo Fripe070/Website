@@ -1,10 +1,11 @@
 ---
+import Layout from "@layouts/Layout.astro";
 import Background from "@components/Background.astro";
 import NavList from "@components/NavList.astro";
-import Layout from "@layouts/Layout.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
 
 const navPages = {
-	"/": "Home",
+	"/": Astro.site?.hostname ?? "Home",
 	"/blog": "Blog",
 };
 ---
@@ -14,6 +15,7 @@ const navPages = {
 	<page-wrapper class="panel-dark">
 		<title-bar class="panel-dark">
 			<NavList navPages={navPages} />
+			<Breadcrumbs />
 		</title-bar>
 		<page-container>
 			<slot />

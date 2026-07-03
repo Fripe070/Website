@@ -8,19 +8,16 @@ const { navPages } = Astro.props;
 <nav>
 	<ul>
 		{
-			Object.entries(navPages).map(([path, name], index) => (
-				<>
-					{index !== 0 && <li class="separator" />}
-					<li>
-						<a
-							tabindex="0"
-							href={path}
-							class={`clickable ${Astro.url.pathname === path && "active"}`}
-						>
-							{name}
-						</a>
-					</li>
-				</>
+			Object.entries(navPages).map(([path, name]) => (
+				<li>
+					<a
+						tabindex="0"
+						href={path}
+						class={`clickable ${Astro.url.pathname === path && "active"}`}
+					>
+						{name}
+					</a>
+				</li>
 			))
 		}
 		<slot />
@@ -35,14 +32,15 @@ const { navPages } = Astro.props;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		height: 100%;
-		> li:not(.separator) {
-			display: contents;
-			a {
-				padding: 2rem;
-			}
+	}
+	li {
+		display: contents;
+		a {
+			padding: 1rem 2rem;
 		}
-		> .separator {
+		&:not(:first-child)::before {
+			content: "";
+			display: inline-block;
 			border-left: 2px solid var(--color-light);
 			align-self: stretch;
 		}

@@ -1,0 +1,41 @@
+---
+const pathSegments: [string, string][] = Astro.url.pathname
+	.split("/")
+	.filter(Boolean)
+	.map((segment, index, segments) => {
+		const segmentPath = "/" + segments.slice(0, index + 1).join("/");
+		return [segment, segmentPath];
+	});
+pathSegments.unshift(["~", "/"]);
+---
+
+<nav>
+	<ol>
+		{
+			pathSegments.slice(0, pathSegments.length - 1).map(([segment, path], index) => (
+				<>
+					<li>
+						<a href={path} class="clickable" tabindex="0">
+							{segment}
+						</a>
+					</li>
+					<li>/</li>
+				</>
+			))
+		}
+		{pathSegments.length > 0 && <li>{pathSegments[pathSegments.length - 1][0]}</li>}
+	</ol>
+</nav>
+
+<style>
+	nav {
+		border-bottom: 2px solid var(--color-light);
+	}
+	ol {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding: 1rem 2rem;
+		gap: 2rem;
+	}
+</style>
