@@ -12,7 +12,11 @@ const { navPages } = Astro.props;
 				<>
 					{index !== 0 && <li class="separator" />}
 					<li>
-						<a tabindex="0" href={path} class="clickable" style="--click-col: var(--color-light);">
+						<a
+							tabindex="0"
+							href={path}
+							class={`clickable ${Astro.url.pathname === path && "active"}`}
+						>
 							{name}
 						</a>
 					</li>
