@@ -6,3 +6,5 @@ pubDate: 2026-07-02
 
 Test which could have images in its folder
 <img src="https://picsum.photos/1920/1080?random" />
+
+![Alt text](https://picsum.photos/200)

@@ -5,6 +5,8 @@ import sitemap from "@astrojs/sitemap";
 import Icons from "unplugin-icons/vite";
 import { unified } from "@astrojs/markdown-remark";
 import { remarkModifiedTime, remarkReadingTime } from "./remark/index.mjs";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 export default defineConfig({
 	// site: "https://fripe.dev",
@@ -15,7 +17,8 @@ export default defineConfig({
 	},
 	markdown: {
 		processor: unified({
-			remarkPlugins: [remarkReadingTime, remarkModifiedTime],
+			remarkPlugins: [remarkReadingTime, remarkModifiedTime, remarkMath],
+			rehypePlugins: [rehypeKatex],
 		}),
 		shikiConfig: {
 			themes: {
