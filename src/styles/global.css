@@ -7,6 +7,7 @@
 	scrollbar-width: auto;
 	scrollbar-color: color(from var(--color-true-light) srgb r g b / var(--opacity-secondary))
 		var(--color-true-dark);
+	scroll-behavior: smooth;
 }
 
 @property --color-dark {

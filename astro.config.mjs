@@ -7,6 +7,8 @@ import { unified } from "@astrojs/markdown-remark";
 import { remarkModifiedTime, remarkReadingTime } from "./remark/index.mjs";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
 
 export default defineConfig({
 	// site: "https://fripe.dev",
@@ -18,7 +20,7 @@ export default defineConfig({
 	markdown: {
 		processor: unified({
 			remarkPlugins: [remarkReadingTime, remarkModifiedTime, remarkMath],
-			rehypePlugins: [rehypeKatex],
+			rehypePlugins: [rehypeKatex, rehypeSlug, [rehypeAutolinkHeadings, { behavior: "wrap" }]],
 		}),
 		shikiConfig: {
 			themes: {
