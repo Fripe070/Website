@@ -14,4 +14,8 @@
 	color-scheme: dark light;
 	--color-dark: light-dark(var(--color-true-light), var(--color-true-dark));
 	--color-light: light-dark(var(--color-true-dark), var(--color-true-light));
+
+	--opacity-primary: 1;
+	--opacity-secondary: 0.7;
+	--opacity-tertiary: 0.5;
 }

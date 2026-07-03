@@ -5,7 +5,8 @@
 	font-family: var(--font-sans);
 
 	scrollbar-width: auto;
-	scrollbar-color: var(--color-true-light) var(--color-true-dark);
+	scrollbar-color: color(from var(--color-true-light) srgb r g b / var(--opacity-secondary))
+		var(--color-true-dark);
 }
 
 @property --color-dark {
@@ -72,14 +73,17 @@ body {
 }
 
 .clickable {
-	--click-col: var(--color-accent);
+	--click-col: var(--color-light);
 	--click-col-alt: contrast-color(var(--click-col));
 
 	color: var(--click-col);
+	text-decoration: underline;
 	&:hover,
-	&:focus-visible {
+	&:focus-visible,
+	&.active {
 		color: var(--click-col-alt);
 		background-color: var(--click-col);
+		text-decoration: none;
 		outline: 2px solid var(--click-col);
 	}
 }
@@ -105,6 +109,8 @@ code {
 }
 
 .prose {
+	font-family: var(--font-code);
+
 	ul {
 		margin-left: 5rem;
 		list-style-type: "-  ";
@@ -125,12 +131,15 @@ code {
 	padding: 1rem 2rem;
 	font-size: 85%;
 	border: 2px solid var(--color-light);
-}
-@media (prefers-color-scheme: dark) {
-	.astro-code {
-		background-color: var(--shiki-dark-bg) !important;
-	}
-	.astro-code span {
-		color: var(--shiki-dark) !important;
+
+	--langauge: attr(data-language);
+	&::before {
+		content: var(--langauge);
+		display: block;
+		width: fit-content;
+		text-transform: uppercase;
+		text-decoration: underline;
+		text-underline-offset: 0.5rem;
+		font-weight: bold;
 	}
 }
