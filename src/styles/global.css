@@ -73,7 +73,8 @@ body {
 	);
 }
 
-.clickable {
+.clickable,
+.prose a {
 	--click-col: var(--color-light);
 	--click-col-alt: contrast-color(var(--click-col));
 

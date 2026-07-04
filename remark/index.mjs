@@ -14,6 +14,13 @@ export function remarkModifiedTime() {
 	return function (tree, file) {
 		const filepath = file.history[0];
 		const result = execSync(`git log -1 --pretty="format:%cI" "${filepath}"`);
-		file.data.astro.frontmatter.lastModified = new Date(result.toString().trim()).toISOString();
+		if (result.toString().trim()) {
+			file.data.astro.frontmatter.lastModified = new Date(result.toString().trim()).toISOString();
+		} else {
+			file.data.astro.frontmatter.lastModified = undefined;
+		}
+
+		const commitCountResult = execSync(`git rev-list --count HEAD -- "${filepath}"`);
+		file.data.astro.frontmatter.modificationCount = Number(commitCountResult.toString().trim());
 	};
 }

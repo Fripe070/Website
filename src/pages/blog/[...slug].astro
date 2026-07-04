@@ -17,8 +17,10 @@ const post = Astro.props;
 const { Content, remarkPluginFrontmatter: remarkData } = await render(post);
 
 const pubDate = new Date(post.data.pubDate);
-const modDate = new Date(remarkData.lastModified);
-const isModified = pubDate.getDay() !== modDate.getDay();
+const modDate = remarkData.lastModified ? new Date(remarkData.lastModified) : pubDate;
+const isModified =
+	(remarkData.modificationCount && remarkData.modificationCount > 1) ||
+	modDate.getTime() !== pubDate.getTime();
 ---
 
 <MainLayout>
@@ -59,14 +61,6 @@ const isModified = pubDate.getDay() !== modDate.getDay();
 </noscript>
 
 <style>
-	comment-section {
-		margin-top: 3rem;
-		padding-top: 3rem;
-		display: block;
-		border-top: 2px solid var(--color-light);
-		max-height: 140rem;
-		overflow-y: auto;
-	}
 	header {
 		border-bottom: 2px solid var(--color-light);
 		padding-bottom: 2rem;
@@ -82,10 +76,17 @@ const isModified = pubDate.getDay() !== modDate.getDay();
 			}
 		}
 	}
-
 	.prose {
 		:is(h1, h2, h3, h4, h5, h6) {
 			scroll-margin-top: 11rem;
 		}
+	}
+	comment-section {
+		margin-top: 3rem;
+		padding-top: 3rem;
+		display: block;
+		border-top: 2px solid var(--color-light);
+		max-height: 140rem;
+		overflow-y: auto;
 	}
 </style>

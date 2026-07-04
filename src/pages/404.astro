@@ -1,14 +1,22 @@
 ---
-import ErrorLayout from "@layouts/ErrorLayout.astro";
+import MainLayout from "@layouts/MainLayout.astro";
 ---
 
-<ErrorLayout>
-	<h1>404</h1>
-	<p>Not found</p>
-	<a href="/" class="clickable">Return home</a>
-</ErrorLayout>
+<MainLayout>
+	<main class="full-size">
+		<h1>404</h1>
+		<p>Not found</p>
+	</main>
+</MainLayout>
 
 <style>
+	main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		flex-grow: 1;
+	}
 	h1 {
 		font-size: 10em;
 		font-weight: bold;
