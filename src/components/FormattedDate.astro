@@ -1,17 +1,53 @@
 ---
 interface Props {
 	date: Date;
+	format?: Intl.DateTimeFormatOptions;
 }
 
-const { date } = Astro.props;
+const {
+	date,
+	format = {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	},
+} = Astro.props;
+
+const fallbackText = new Intl.DateTimeFormat("en-GB", { ...format, timeZone: "UTC" }).format(date);
 ---
 
-<time datetime={date.toISOString()}>
-	{
-		date.toLocaleDateString("en-uk", {
-			year: "numeric",
-			month: "short",
-			day: "numeric",
-		})
+<local-time data-format={JSON.stringify(format)}>
+	<time datetime={date.toISOString()}>
+		{fallbackText}
+	</time>
+</local-time>
+
+<script>
+	class LocalTime extends HTMLElement {
+		connectedCallback() {
+			if (!this.dataset.format) {
+				console.error("No format provided for <local-time> component.");
+				return;
+			}
+			const format = JSON.parse(this.dataset.format);
+			const timeElement = this.querySelector("time");
+			if (!timeElement) {
+				console.error("No <time> element found inside <local-time> component.");
+				return;
+			}
+			const dateAttr = timeElement.getAttribute("datetime");
+			if (!dateAttr) {
+				console.error(
+					"No datetime attribute found on <time> element inside <local-time> component.",
+				);
+				return;
+			}
+			const date = new Date(dateAttr);
+			const formattedDate = new Intl.DateTimeFormat(undefined, format).format(date);
+			timeElement.textContent = formattedDate;
+		}
 	}
-</time>
+	if (!customElements.get("local-time")) {
+		customElements.define("local-time", LocalTime);
+	}
+</script>
