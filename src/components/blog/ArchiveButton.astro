@@ -1,0 +1,29 @@
+---
+import ArchiveIcon from "~icons/simple-icons/internetarchive";
+
+interface Props {
+	url: string;
+	archiveId: string;
+}
+const { url, archiveId } = Astro.props;
+---
+
+<a
+	href={`https://web.archive.org/web/${archiveId}/${url}`}
+	class="clickable"
+	tabindex="0"
+	target="_blank"
+	rel="noopener noreferrer"
+>
+	<ArchiveIcon class="icon" />
+	<label class="sr-only">Archive of {url} on the Wayback Machine</label>
+</a>
+
+<style>
+	.icon {
+		width: 1em;
+		height: 1em;
+		display: inline-block;
+		vertical-align: -0.125em;
+	}
+</style>

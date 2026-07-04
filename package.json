@@ -30,6 +30,7 @@
 		"unplugin-icons": "^23.0.1"
 	},
 	"devDependencies": {
+		"@iconify-json/simple-icons": "^1.2.88",
 		"prettier": "3.9.4",
 		"prettier-plugin-astro": "0.14.1"
 	}
