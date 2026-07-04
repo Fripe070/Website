@@ -71,8 +71,10 @@ const blogPosts = await getCollection("blog");
 	}
 
 	.post {
+		padding-bottom: 1rem;
 		border-bottom: 2px solid var(--color-light);
-		&:hover, &:focus-within {
+		&:hover,
+		&:focus-within {
 			background-color: var(--color-light);
 			color: var(--color-dark);
 			outline: 1rem solid var(--color-light);

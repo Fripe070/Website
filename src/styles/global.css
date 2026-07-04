@@ -74,7 +74,7 @@ body {
 }
 
 .clickable,
-.prose a {
+.prose a:not(:is(h1, h2, h3, h4, h5, h6) a) {
 	--click-col: var(--color-light);
 	--click-col-alt: contrast-color(var(--click-col));
 
@@ -111,11 +111,9 @@ code {
 }
 
 .prose {
-	font-family: var(--font-code);
-
 	ul {
 		margin-left: 5rem;
-		list-style-type: "-  ";
+		list-style-type: disc;
 	}
 	ol {
 		margin-left: 5rem;
@@ -141,7 +139,7 @@ h6 {
 }
 
 .astro-code {
-	margin: 1rem 0;
+	margin: 2rem 0;
 	padding: 1rem 2rem;
 	font-size: 85%;
 	border: 2px solid var(--color-light);

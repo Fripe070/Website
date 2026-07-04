@@ -22,14 +22,14 @@ const navPages = {
 			<slot />
 		</page-container>
 		<footer>
-			<footer-website>
+			<div>
 				<a
 					class="clickable"
 					href="https://github.com/Fripe070/website"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					Website Sources
+					Website Source
 				</a>
 				<span>
 					Updated <FormattedDate
@@ -55,7 +55,29 @@ const navPages = {
 					<!-- Light blue heart emoji -->
 					{`\u{1FA75}`}
 				</span>
-			</footer-website>
+			</div>
+			<div>
+				<span>
+					Code license: <a
+						class="clickable"
+						href="https://interoperable-europe.ec.europa.eu/collection/eupl/eupl-text-eupl-12"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						EUPL 1.2
+					</a>
+				</span>
+				<span>
+					Content license: <a
+						class="clickable"
+						href="http://creativecommons.org/licenses/by/4.0/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						CC BY 4.0
+					</a>
+				</span>
+			</div>
 		</footer>
 	</page-wrapper>
 </Layout>
