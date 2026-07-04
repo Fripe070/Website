@@ -3,6 +3,7 @@ import Layout from "@layouts/Layout.astro";
 import Background from "@components/Background.astro";
 import NavList from "@components/NavList.astro";
 import Breadcrumbs from "@components/Breadcrumbs.astro";
+import FormattedDate from "@components/FormattedDate.astro";
 
 const navPages = {
 	"/": Astro.site?.hostname ?? "Home",
@@ -20,7 +21,42 @@ const navPages = {
 		<page-container>
 			<slot />
 		</page-container>
-		<footer></footer>
+		<footer>
+			<footer-website>
+				<a
+					class="clickable"
+					href="https://github.com/Fripe070/website"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Website Sources
+				</a>
+				<span>
+					Updated <FormattedDate
+						date={new Date()}
+						format={{
+							year: "numeric",
+							month: "short",
+							day: "numeric",
+							hour: "2-digit",
+							minute: "2-digit",
+						}}
+					/>
+				</span>
+				<span>
+					<a
+						class="clickable"
+						href="https://github.com/sponsors/Fripe070"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Donate
+					</a>
+					<!-- Light blue heart emoji -->
+					{`\u{1FA75}`}
+				</span>
+			</footer-website>
+		</footer>
 	</page-wrapper>
 </Layout>
 
@@ -34,6 +70,14 @@ const navPages = {
 	footer {
 		border-top: 2px solid var(--color-light);
 		padding: 3rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		> * {
+			display: flex;
+			flex-direction: row;
+			gap: 3rem;
+		}
 	}
 
 	page-wrapper {
