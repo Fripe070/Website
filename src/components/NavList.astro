@@ -3,6 +3,8 @@ interface Props {
 	navPages: Record<string, string>;
 }
 const { navPages } = Astro.props;
+
+const addTrailing = (path: string) => (path.endsWith("/") ? path : path + "/");
 ---
 
 <nav>
@@ -13,7 +15,7 @@ const { navPages } = Astro.props;
 					<a
 						tabindex="0"
 						href={path}
-						class={`clickable ${Astro.url.pathname === path && "active"}`}
+						class={`clickable ${addTrailing(path) === addTrailing(Astro.url.pathname) && "active"}`}
 					>
 						{name}
 					</a>

@@ -13,6 +13,8 @@ import rehypeSlug from "rehype-slug";
 export default defineConfig({
 	site: "https://fripe.dev",
 	// site: "http://localhost:4321",
+	base: "/",
+
 	integrations: [mdx(), sitemap()],
 	vite: {
 		plugins: [Icons({ compiler: "astro" })],
