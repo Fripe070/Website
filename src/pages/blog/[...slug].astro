@@ -15,12 +15,6 @@ type Props = CollectionEntry<"blog">;
 
 const post = Astro.props;
 const { Content, remarkPluginFrontmatter: remarkData } = await render(post);
-
-const pubDate = new Date(post.data.pubDate);
-const modDate = remarkData.lastModified ? new Date(remarkData.lastModified) : pubDate;
-const isModified =
-	(remarkData.modificationCount && remarkData.modificationCount > 1) ||
-	modDate.getTime() !== pubDate.getTime();
 ---
 
 <MainLayout>
@@ -30,11 +24,11 @@ const isModified =
 				<h1>{post.data.title}</h1>
 				<post-meta>
 					<reading-time>{remarkData.minutesRead}</reading-time>
-					<date-published>Published <FormattedDate date={pubDate} /></date-published>
+					<date-published>Published <FormattedDate date={post.data.pubDate} /></date-published>
 					{
-						isModified && (
+						post.data.modDate && (
 							<date-modified>
-								Last updated <FormattedDate date={modDate} />
+								Last updated <FormattedDate date={post.data.modDate} />
 							</date-modified>
 						)
 					}
