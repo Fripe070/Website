@@ -1,5 +1,6 @@
 <page-background>
 	<img src="https://picsum.photos/1000/750" />
+	<fade-overlay></fade-overlay>
 	<scan-lines></scan-lines>
 </page-background>
 
@@ -22,6 +23,19 @@
 			mix-blend-mode: multiply;
 			background-color: hsl(0, 0%, 40%);
 		}
+	}
+
+	fade-overlay {
+		--left-cutoff: calc(50% - var(--content-width) / 2);
+		--right-cutoff: calc(50% + var(--content-width) / 2);
+		--fade-color: var(--color-true-dark);
+		background: linear-gradient(
+			to right,
+			var(--fade-color),
+			transparent var(--left-cutoff),
+			transparent var(--right-cutoff),
+			var(--fade-color)
+		);
 	}
 
 	scan-lines {
