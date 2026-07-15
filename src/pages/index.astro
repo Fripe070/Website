@@ -1,7 +1,147 @@
 ---
 import MainLayout from "@layouts/MainLayout.astro";
+import { Image } from "astro:assets";
+
+const profilePictures = Object.values(import.meta.glob("@assets/pfp/*.png", { eager: true, import: "default" }));
+
+const keyframeLines = [];
+for (let i = 0; i < profilePictures.length; i++) {
+	const start = i / profilePictures.length;
+	const end = (i + 0.8) / profilePictures.length;
+	keyframeLines.push(
+		"    " +
+			`${(start * 100).toFixed(0)}%, `.padEnd(5) +
+			`${(end * 100).toFixed(0)}% ` +
+			`{ --transition-factor: ${i}; }`,
+	);
+}
+keyframeLines.push(`        100% { --transition-factor: ${profilePictures.length}; }`);
+
+const cssKeyframes = `@keyframes profile-picture-swipe {
+${keyframeLines.join("\n")}
+}`;
 ---
 
 <MainLayout>
-	<main>Meow</main>
+	<main>
+		<section class="profile-card">
+			<profile-picture style={`--pfp-count: ${profilePictures.length}`}>
+				{
+					profilePictures.map((picture) => (
+						<Image aria-hidden="true" alt="" src={picture} width={150} height={150} />
+					))
+				}
+				<Image alt="Profile picture" src={profilePictures[0]} width={150} height={150} />
+			</profile-picture>
+			<profile-info>
+				<h1>Fripe</h1>
+				<p>
+					Software developer, graphics enthusiast, wheel reinventer, minecrafter, and curious mind.
+				</p>
+				<socials-list>
+					<a
+						class="clickable"
+						href="https://github.com/Fripe070"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						GitHub
+					</a>
+					<a
+						class="clickable"
+						href="https://social.treehouse.systems/@fripe"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Mastodon
+					</a>
+				</socials-list>
+			</profile-info>
+		</section>
+		<section>
+			<ul class="projects">
+				<li>
+					<article>
+						<a href="https://shaders.fripe.dev" target="_blank" rel="noopener noreferrer">
+							<header><h3>ShaderCoy</h3></header>
+							<p>A shader editor with support for vertex and fragment shaders in both 2D and 3D.</p>
+						</a>
+					</article>
+				</li>
+				<li>
+					<article>
+						<a href="https://tools.fripe.dev" target="_blank" rel="noopener noreferrer">
+							<header><h3>Webtools</h3></header>
+							<p>A collection of small web-based utilities and tools I've made.</p>
+						</a>
+					</article>
+				</li>
+				<li>
+					<article>
+						<a
+							href="https://github.com/Fripe070/LowLevelGame2"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<header><h3>LowLevelGame2</h3></header>
+							<p>A now-abandoned game project written in C++ using SDL2 and OpenGL.</p>
+						</a>
+					</article>
+				</li>
+			</ul>
+		</section>
+	</main>
 </MainLayout>
+
+<style is:inline set:html={cssKeyframes}></style>
+
+<style>
+	main {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.profile-card {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: 4rem;
+		padding: 2rem;
+		border: 2px solid var(--color-light);
+	}
+	profile-picture {
+		flex-shrink: 0;
+		aspect-ratio: 1 / 1;
+		overflow: hidden;
+		> img {
+			animation: profile-picture-swipe calc(8s * var(--pfp-count)) infinite
+				cubic-bezier(0.5, -0.2, 0.5, 1.2);
+
+			--sin-transition: calc(abs(sin(var(--transition-factor) * 3.14159rad)));
+			transform: translateY(calc(-100% * var(--transition-factor)))
+				scale(calc(1 - (0.2 * var(--sin-transition))));
+		}
+	}
+	@property --transition-factor {
+		syntax: "<number>";
+		inherits: false;
+		initial-value: 0;
+	}
+
+	socials-list {
+		display: flex;
+		flex-direction: row;
+		gap: 2rem;
+	}
+
+	.projects {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(70rem, 1fr));
+		gap: 2rem;
+		> li {
+			padding: 1rem;
+			border: 2px solid var(--color-light);
+		}
+	}
+</style>
