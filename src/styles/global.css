@@ -90,6 +90,13 @@ body {
 	}
 }
 
+.inline-icon {
+	width: 1em;
+	height: 1em;
+	display: inline-block;
+	vertical-align: -0.125em;
+}
+
 *::selection {
 	background-color: var(--color-accent);
 	color: contrast-color(var(--color-accent));

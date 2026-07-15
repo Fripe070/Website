@@ -2,6 +2,9 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import { Image } from "astro:assets";
 
+import GithubIcon from "~icons/simple-icons/github";
+import MastodonIcon from "~icons/simple-icons/mastodon";
+
 const profilePictures: ImageMetadata[] = Object.values(
 	import.meta.glob("@assets/pfp/*.png", { eager: true, import: "default" }),
 );
@@ -39,7 +42,7 @@ ${keyframeLines.join("\n")}
 				<h1>Fripe</h1>
 				<p>
 					Software developer, graphics enthusiast, wheel reinventer, minecrafter, and curious mind.
-					I dabble in Blender.
+					I also dabble in Blender and procedural art.
 				</p>
 				<socials-list>
 					<a
@@ -48,6 +51,7 @@ ${keyframeLines.join("\n")}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
+						<GithubIcon class="inline-icon" />
 						GitHub
 					</a>
 					<a
@@ -56,6 +60,7 @@ ${keyframeLines.join("\n")}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
+						<MastodonIcon class="inline-icon" />
 						Mastodon
 					</a>
 				</socials-list>
@@ -105,6 +110,10 @@ ${keyframeLines.join("\n")}
 		gap: 2rem;
 	}
 
+	.inline-icon {
+		margin-right: 1rem;
+	}
+	
 	.profile-card {
 		display: flex;
 		flex-direction: row;

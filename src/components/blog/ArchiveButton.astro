@@ -15,15 +15,6 @@ const { url, archiveId } = Astro.props;
 	target="_blank"
 	rel="noopener noreferrer"
 >
-	<ArchiveIcon class="icon" />
+	<ArchiveIcon class="inline-icon" />
 	<label class="sr-only">Archive of {url} on the Wayback Machine</label>
 </a>
-
-<style>
-	.icon {
-		width: 1em;
-		height: 1em;
-		display: inline-block;
-		vertical-align: -0.125em;
-	}
-</style>
