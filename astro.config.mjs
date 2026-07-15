@@ -4,7 +4,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import Icons from "unplugin-icons/vite";
 import { unified } from "@astrojs/markdown-remark";
-import { remarkModifiedTime, remarkReadingTime } from "./remark/index.mjs";
+import { remarkReadingTime } from "./remark/index.mjs";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -21,7 +21,7 @@ export default defineConfig({
 	},
 	markdown: {
 		processor: unified({
-			remarkPlugins: [remarkReadingTime, remarkModifiedTime, remarkMath],
+			remarkPlugins: [remarkReadingTime, remarkMath],
 			rehypePlugins: [rehypeKatex, rehypeSlug, [rehypeAutolinkHeadings, { behavior: "wrap" }]],
 		}),
 		shikiConfig: {
