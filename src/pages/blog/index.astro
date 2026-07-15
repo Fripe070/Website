@@ -46,7 +46,7 @@ const blogPosts = await getCollection("blog");
 	}
 
 	filter-bar {
-		border-bottom: 2px solid var(--color-light);
+		border-bottom: var(--border-width) solid var(--color-light);
 		padding-bottom: 2rem;
 		display: flex;
 		flex-direction: row;
@@ -72,12 +72,23 @@ const blogPosts = await getCollection("blog");
 
 	.post {
 		padding-bottom: 1rem;
-		border-bottom: 2px solid var(--color-light);
+		position: relative;
+		&::after {
+			content: "";
+			position: absolute;
+			top: 100%;
+			left: 0;
+			width: 100%;
+			border-bottom: var(--border-width) solid var(--color-light);
+		}
 		&:hover,
 		&:focus-within {
 			background-color: var(--color-light);
 			color: var(--color-dark);
-			outline: 1rem solid var(--color-light);
+			outline: var(--border-width) solid var(--color-light);
+			&::after {
+				border-color: transparent;
+			}
 		}
 
 		header {

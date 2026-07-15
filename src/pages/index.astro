@@ -2,7 +2,9 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import { Image } from "astro:assets";
 
-const profilePictures = Object.values(import.meta.glob("@assets/pfp/*.png", { eager: true, import: "default" }));
+const profilePictures = Object.values(
+	import.meta.glob("@assets/pfp/*.png", { eager: true, import: "default" }),
+);
 
 const keyframeLines = [];
 for (let i = 0; i < profilePictures.length; i++) {
@@ -108,7 +110,7 @@ ${keyframeLines.join("\n")}
 		align-items: center;
 		gap: 4rem;
 		padding: 2rem;
-		border: 2px solid var(--color-light);
+		border: var(--border-width) solid var(--color-light);
 	}
 	profile-picture {
 		flex-shrink: 0;
@@ -141,7 +143,11 @@ ${keyframeLines.join("\n")}
 		gap: 2rem;
 		> li {
 			padding: 1rem;
-			border: 2px solid var(--color-light);
+			border: var(--border-width) solid var(--color-light);
+			&:hover {
+				background-color: var(--color-light);
+				color: var(--color-dark);
+			}
 		}
 	}
 </style>

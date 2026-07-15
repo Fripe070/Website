@@ -28,7 +28,7 @@ const addTrailing = (path: string) => (path.endsWith("/") ? path : path + "/");
 
 <style>
 	nav {
-		border-bottom: 2px solid var(--color-light);
+		border-bottom: var(--border-width) solid var(--color-light);
 	}
 	ul {
 		display: flex;
@@ -43,7 +43,7 @@ const addTrailing = (path: string) => (path.endsWith("/") ? path : path + "/");
 		&:not(:first-child)::before {
 			content: "";
 			display: inline-block;
-			border-left: 2px solid var(--color-light);
+			border-left: var(--border-width) solid var(--color-light);
 			align-self: stretch;
 		}
 	}

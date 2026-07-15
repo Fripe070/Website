@@ -90,7 +90,7 @@ const navPages = {
 		z-index: 100;
 	}
 	footer {
-		border-top: 2px solid var(--color-light);
+		border-top: var(--border-width) solid var(--color-light);
 		padding: 3rem;
 		display: flex;
 		flex-direction: column;
@@ -105,10 +105,10 @@ const navPages = {
 	page-wrapper {
 		flex-grow: 1;
 		width: 100%;
-		max-width: 180rem;
+		max-width: var(--content-width);
 		margin: 0 auto;
 		/* Outline will not render for screens slimmer than the max width */
-		outline: 2px solid var(--color-light);
+		outline: var(--border-width) solid var(--color-light);
 		display: flex;
 		flex-direction: column;
 	}

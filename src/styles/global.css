@@ -86,7 +86,7 @@ body {
 		color: var(--click-col-alt);
 		background-color: var(--click-col);
 		text-decoration: none;
-		outline: 2px solid var(--click-col);
+		outline: var(--border-width) solid var(--click-col);
 	}
 }
 
@@ -102,7 +102,7 @@ a {
 
 hr {
 	border: none;
-	border-top: 2px solid var(--color-light);
+	border-top: var(--border-width) solid var(--color-light);
 	margin: 2rem 0;
 }
 
@@ -142,7 +142,7 @@ h6 {
 	margin: 2rem 0;
 	padding: 1rem 2rem;
 	font-size: 85%;
-	border: 2px solid var(--color-light);
+	border: var(--border-width) solid var(--color-light);
 
 	--langauge: attr(data-language);
 	&::before {
