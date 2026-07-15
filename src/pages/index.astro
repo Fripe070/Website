@@ -2,7 +2,7 @@
 import MainLayout from "@layouts/MainLayout.astro";
 import { Image } from "astro:assets";
 
-const profilePictures = Object.values(
+const profilePictures: ImageMetadata[] = Object.values(
 	import.meta.glob("@assets/pfp/*.png", { eager: true, import: "default" }),
 );
 
@@ -39,6 +39,7 @@ ${keyframeLines.join("\n")}
 				<h1>Fripe</h1>
 				<p>
 					Software developer, graphics enthusiast, wheel reinventer, minecrafter, and curious mind.
+					I dabble in Blender.
 				</p>
 				<socials-list>
 					<a
