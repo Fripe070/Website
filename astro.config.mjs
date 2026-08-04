@@ -26,8 +26,8 @@ export default defineConfig({
 		}),
 		shikiConfig: {
 			themes: {
-				light: "one-dark-pro",
-				dark: "one-dark-pro",
+				light: "houston",
+				dark: "houston",
 			},
 		},
 	},
