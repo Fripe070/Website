@@ -33,10 +33,10 @@ ${keyframeLines.join("\n")}
 			<profile-picture style={`--pfp-count: ${profilePictures.length}`}>
 				{
 					profilePictures.map((picture) => (
-						<Image aria-hidden="true" alt="" src={picture} width={150} height={150} />
+						<Image aria-hidden="true" alt="" src={picture} width={256} height={256} />
 					))
 				}
-				<Image alt="Profile picture" src={profilePictures[0]} width={150} height={150} />
+				<Image alt="Profile picture" src={profilePictures[0]} width={256} height={256} />
 			</profile-picture>
 			<profile-info>
 				<h1>Fripe</h1>
@@ -127,6 +127,9 @@ ${keyframeLines.join("\n")}
 		aspect-ratio: 1 / 1;
 		overflow: hidden;
 		> img {
+			width: 35rem;
+			height: 35rem;
+			
 			animation: profile-picture-swipe calc(8s * var(--pfp-count)) infinite
 				cubic-bezier(0.5, -0.2, 0.5, 1.2);
 
