@@ -17,7 +17,15 @@ const post = Astro.props;
 const { Content, remarkPluginFrontmatter: remarkData } = await render(post);
 ---
 
-<MainLayout>
+<MainLayout
+	meta={{
+		title: post.data.title,
+		description: post.data.description,
+		type: "article",
+		publishedTime: post.data.pubDate,
+		modifiedTime: post.data.modDate,
+	}}
+>
 	<main>
 		<article>
 			<header>

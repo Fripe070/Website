@@ -3,11 +3,17 @@ import "@styles/global.css";
 import "katex/dist/katex.min.css";
 import MetaTags from "@components/MetaTags.astro";
 import { ClientRouter } from "astro:transitions";
+import type { ComponentProps } from "astro/types";
+
+interface Props {
+	meta?: ComponentProps<typeof MetaTags>;
+}
+const { meta = {} } = Astro.props;
 ---
 
 <html lang="en">
 	<head>
-		<MetaTags />
+		<MetaTags {...meta} />
 		<ClientRouter fallback="animate" />
 	</head>
 	<body>
