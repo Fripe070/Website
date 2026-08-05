@@ -7,11 +7,12 @@ import type { ComponentProps } from "astro/types";
 
 interface Props {
 	meta?: ComponentProps<typeof MetaTags>;
+	lang?: string;
 }
-const { meta = {} } = Astro.props;
+const { meta = {}, lang = "en" } = Astro.props;
 ---
 
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<MetaTags {...meta} />
 		<ClientRouter fallback="animate" />

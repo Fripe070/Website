@@ -26,6 +26,9 @@ const blogPosts = await getCollection("blog");
 								<article>
 									<header>
 										<h2>{post.data.title}</h2>
+										<span>
+											{new Intl.DisplayNames(["en"], { type: "language" }).of(post.data.lang)} |
+										</span>
 										<FormattedDate date={post.data.pubDate} />
 									</header>
 									<p>{post.data.description}</p>

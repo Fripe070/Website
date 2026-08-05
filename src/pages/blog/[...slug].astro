@@ -18,6 +18,7 @@ const { Content, remarkPluginFrontmatter: remarkData } = await render(post);
 ---
 
 <MainLayout
+	lang={post.data.lang}
 	meta={{
 		title: post.data.title,
 		description: post.data.description,
@@ -30,8 +31,12 @@ const { Content, remarkPluginFrontmatter: remarkData } = await render(post);
 		<article>
 			<header>
 				<h1>{post.data.title}</h1>
+				<p>{post.data.description}</p>
 				<post-meta>
 					<reading-time>{remarkData.minutesRead}</reading-time>
+					<post-lang>
+						{new Intl.DisplayNames(["en"], { type: "language" }).of(post.data.lang)}
+					</post-lang>
 					<date-published>Published <FormattedDate date={post.data.pubDate} /></date-published>
 					{
 						post.data.modDate && (
